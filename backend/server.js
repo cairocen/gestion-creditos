@@ -5,13 +5,14 @@ const cors = require('cors');
 const User = require('./models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();  // Cargar variables de entorno desde .env
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Cadena de conexión sin autenticación
-mongoose.connect('mongodb://localhost:27017/gestorCreditos')
+// Conectar a MongoDB usando la variable de entorno
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log('Conexión a MongoDB exitosa');
     })
